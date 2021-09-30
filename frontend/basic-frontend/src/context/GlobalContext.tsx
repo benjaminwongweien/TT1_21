@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext } from "react";
 
 export interface User {
   token: string;
@@ -9,4 +9,6 @@ export interface GlobalContextProps {
   setUser: (user: User) => void;
 }
 
-export const GlobalContext = createContext<GlobalContextProps>({} as GlobalContextProps);
+export const GlobalContext = createContext<GlobalContextProps>(
+  {} as GlobalContextProps
+);
