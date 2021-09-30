@@ -16,7 +16,7 @@ class EcommerceOrder(models.Model):
     customer_id = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="user")
     status = models.IntegerField(null=False)
-    created_at = models.DateField(null=False)
+    created_at = models.DateTimeField(auto_now=True)
 
 
 class EcommerceProduct(models.Model):
@@ -31,8 +31,8 @@ class EcommerceProduct(models.Model):
 
 class EcommerceOrderItem(models.Model):
     product_id = models.ForeignKey(
-        EcommerceProduct, on_delete=models.CASCADE, related_name="orderitem")
+        EcommerceProduct, on_delete=models.CASCADE, related_name="productitem")
     order_id = models.ForeignKey(
-        EcommerceOrder, on_delete=models.CASCADE, related_name="orderitem")
+        EcommerceOrder, on_delete=models.CASCADE, related_name="orderid")
     product_qty = models.IntegerField(null=True)
     total_price = models.FloatField(null=True)
