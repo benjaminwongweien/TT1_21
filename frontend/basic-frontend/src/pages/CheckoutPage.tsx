@@ -48,8 +48,6 @@ export const CheckoutPage = () => {
         break;
       }
     }
-
-    console.log(cartItems);
   };
 
   const cartItemsJSX = (

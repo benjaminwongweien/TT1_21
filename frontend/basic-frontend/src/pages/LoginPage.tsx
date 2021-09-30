@@ -12,16 +12,16 @@ export const LoginPage = () => {
 
   const onFinish = async (values: any) => {
     try {
-      // const res = await authService.login({
-      //   email: values.email,
-      //   password: values.password,
-      // });
-      // console.log(res);
-      // setUser({ token: res.data.access_token });
-      // sessionStorage.setItem(
-      //   "accessToken",
-      //   JSON.stringify(res.data.access_token)
-      // );
+      const resv = await authService.login({
+        email: values.email,
+        password: values.password,
+      });
+      var abc = JSON.parse(JSON.stringify(resv))
+      setUser({ token: abc.access_token });
+      sessionStorage.setItem(
+        "accessToken",
+        abc
+      );
       history.push("/home");
     } catch (err: any) {
       notificationService.error(err.error, err.message);

@@ -1,6 +1,7 @@
 import { List } from '@amcharts/amcharts4/core';
 import { createContext } from 'react';
 
+
 export interface User {
   token: string;
 }
@@ -16,4 +17,6 @@ export interface GlobalContextProps {
   cartItems: CartItem[];
 }
 
-export const GlobalContext = createContext<GlobalContextProps>({} as GlobalContextProps);
+export const GlobalContext = createContext<GlobalContextProps>(
+  {} as GlobalContextProps
+);

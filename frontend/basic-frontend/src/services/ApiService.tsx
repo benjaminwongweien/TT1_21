@@ -8,7 +8,7 @@ const apiInstance = axios.create({
 
 apiInstance.interceptors.request.use(config => {
   if (!!sessionStorage.getItem('token')) {
-    config.headers['x-access-token'] = JSON.parse(sessionStorage.getItem('token')!);
+    config.headers['Authorization'] = 'Bearer ' + sessionStorage.getItem('token')!;
   }
   return config;
 })
