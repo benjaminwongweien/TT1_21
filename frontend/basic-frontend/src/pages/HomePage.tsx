@@ -13,10 +13,10 @@ export const HomePage = () => {
 
   const onInit = async () => {
     try {
-      const res = await testService.test();
-      console.log(res);
+      // const res = await testService.test();
+      // console.log(res);
     } catch (err: any) {
-      notificationService.error(err.error, err.message);
+      // notificationService.error(err.error, err.message);
     }
   };
 

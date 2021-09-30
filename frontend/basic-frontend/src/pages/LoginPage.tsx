@@ -17,11 +17,14 @@ export const LoginPage = () => {
         password: values.password,
       });
       console.log(res);
-      // setUser({ token: res.token });
-      // sessionStorage.setItem("token", JSON.stringify(res.token));
+      setUser({ token: res.data.access_token });
+      sessionStorage.setItem(
+        "accessToken",
+        JSON.stringify(res.data.access_token)
+      );
       history.push("/home");
     } catch (err: any) {
-      // notificationService.error(err.error, err.message);
+      notificationService.error(err.error, err.message);
     }
   };
 

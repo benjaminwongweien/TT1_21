@@ -4,8 +4,9 @@ export interface LoginReq {
 }
 
 export interface LoginRes {
-  token: string;
+  access_token: string;
 }
+
 export interface Customer {
   id: number;
   username: string;
