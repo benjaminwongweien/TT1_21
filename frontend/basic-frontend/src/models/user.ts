@@ -5,6 +5,8 @@ export interface LoginReq {
 
 export interface LoginRes {
   access_token: string;
+  refresh_token: string;
+  user: Object;
 }
 
 export interface Customer {

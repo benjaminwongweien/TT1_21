@@ -3,7 +3,10 @@ import {
   BarChartOutlined,
   LogoutOutlined,
   ShoppingCartOutlined,
+<<<<<<< HEAD
   ShoppingOutlined
+=======
+>>>>>>> 8e7567fc2a11b799b66c3cdf32232a3c7889ed92
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import { Header } from "antd/lib/layout/layout";
@@ -38,8 +41,13 @@ export const BaseLayout = ({ children }: BaseLayoutProps) => {
         onClick: () => history.push("/charts"),
       },
       {
+<<<<<<< HEAD
         icon: <ShoppingCartOutlined/>,
         name: "Cart",
+=======
+        icon: <ShoppingCartOutlined />,
+        name: "Checkout",
+>>>>>>> 8e7567fc2a11b799b66c3cdf32232a3c7889ed92
         onClick: () => history.push("/checkout"),
       },
     ] as MenuConfig[];

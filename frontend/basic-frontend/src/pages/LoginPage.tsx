@@ -16,12 +16,10 @@ export const LoginPage = () => {
       //   email: values.email,
       //   password: values.password,
       // });
-      // console.log(res);
-      // setUser({ token: res.data.access_token });
-      // sessionStorage.setItem(
-      //   "accessToken",
-      //   JSON.stringify(res.data.access_token)
-      // );
+      // console.log(res.data.access_token);
+      // const accessToken = res.data.access_token;
+      // setUser({ token: accessToken });
+      // sessionStorage.setItem("accessToken", accessToken);
       history.push("/home");
     } catch (err: any) {
       notificationService.error(err.error, err.message);

@@ -23,7 +23,6 @@ export const CheckoutPage = () => {
     // axios.post(url, cartItems).then(function (response) {
     //   console.log(response);
     // });
-
   };
 
   return (

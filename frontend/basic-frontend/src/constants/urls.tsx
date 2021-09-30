@@ -6,5 +6,8 @@ export enum Url {
   HOME = "/home",
   CHARTS = "/charts",
   CHECKOUT = "/checkout",
+<<<<<<< HEAD
   SHOP = "/shop"
+=======
+>>>>>>> 8e7567fc2a11b799b66c3cdf32232a3c7889ed92
 }
