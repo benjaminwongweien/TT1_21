@@ -11,18 +11,19 @@ export const LoginPage = () => {
   const history = useHistory();
 
   const onFinish = async (values: any) => {
-    history.push("/home");
-    // try {
-    //   const res = await authService.login({
-    //     username: values.username,
-    //     password: values.password,
-    //   });
-    //   setUser({ token: res.token });
-    //   sessionStorage.setItem("token", JSON.stringify(res.token));
-    //   history.push("/home");
-    // } catch (err: any) {
-    //   notificationService.error(err.error, err.message);
-    // }
+    // history.push("/home");
+    try {
+      const res = await authService.login({
+        username: values.username,
+        password: values.password,
+      });
+      console.log(res);
+      setUser({ token: res.token });
+      sessionStorage.setItem("token", JSON.stringify(res.token));
+      history.push("/home");
+    } catch (err: any) {
+      notificationService.error(err.error, err.message);
+    }
   };
 
   return (
