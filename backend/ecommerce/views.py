@@ -61,6 +61,8 @@ class AddOrder(APIView):
 
         new_order = EcommerceOrder.objects.create(
             customer_id=request.user, status=1)
+        
+        orderitemids = []
 
         for x in request.data:
 
@@ -69,6 +71,10 @@ class AddOrder(APIView):
                 pk=x["product_id"]).first()
             x["total_price"] = x["product_id"].price * x["product_qty"]
 
-            EcommerceOrderItem.objects.create(**x)
+            orderitem = EcommerceOrderItem.objects.create(**x)
+            
+            orderitemids.append(orderitem.pk)
 
-        return Response({}, status=200)
+        return Response({
+            "order_id": new_order.pk,
+            "order_item_ids": orderitemids}, status=200)
