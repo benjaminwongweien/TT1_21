@@ -1,4 +1,4 @@
 django
 django-cors-headers
-allauth
+django-allauth
 dj-rest-auth
