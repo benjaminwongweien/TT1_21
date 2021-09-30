@@ -1,11 +1,12 @@
 export interface LoginReq {
-  username: string;
+  email: string;
   password: string;
 }
 
 export interface LoginRes {
-  token: string;
+  access_token: string;
 }
+
 export interface Customer {
   id: number;
   username: string;
