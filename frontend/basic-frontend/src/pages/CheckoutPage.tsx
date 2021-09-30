@@ -1,41 +1,78 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Form, Input, Button, Checkbox, Card } from "antd";
-import { Fragment, useContext, useEffect } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { GlobalContext } from "../context";
 import { authService, notificationService } from "../services";
+import { apiService } from "../services";
 import { BaseLayout } from "../layout";
 import axios from "axios";
+import { isWithStatement } from "typescript";
+import { CartItem } from "../context";
 
 export const CheckoutPage = () => {
-  const { setUser } = useContext(GlobalContext);
-
+  let { setUser,cartItems } = useContext(GlobalContext);
+ 
   const history = useHistory();
 
   const onFinish = async (values: any) => {
     console.log(values);
-
-    let date = Date.now();
-    console.log(date);
-    let cartItems = { cart: [{ objectId: "obj id", num: 1 }] };
-    //send data
-    // let url = "http://localhost:8000/";
-    // axios.post(url, cartItems).then(function (response) {
-    //   console.log(response);
-    // });
-
+    console.log(cartItems);
+    let url = "http://localhost:8000/addorder/";
+    let response = await apiService.post(url, cartItems);
+    console.log(response);
   };
+
+  const AddHandler = (itemId: any) => {
+    console.log("Add :", itemId);
+
+    for (let i = 0; i < cartItems.length; i++) {
+      if (cartItems[i].product_id === itemId) {
+        cartItems[i].product_qty += 1;
+        break;
+      }
+    }
+
+    console.log(cartItems);
+  };
+
+  const RemoveHandler = (itemId: any) => {
+    console.log("Remove :", itemId);
+
+    for (let i = 0; i < cartItems.length; i++) {
+      if (cartItems[i].product_id === itemId) {
+        cartItems[i].product_qty -= 1;
+        if (cartItems[i].product_qty <= 0) {
+            cartItems = cartItems.filter((item) => item.product_id !== itemId);
+        }
+        break;
+      }
+    }
+
+    console.log(cartItems);
+  };
+
+  const cartItemsJSX = (
+    <ul>
+      {cartItems.map((item) => (
+        <Card key={item.product_id}>
+          <p>Item: {item.product_id}</p>
+          <p>Quantity: {item.product_qty}</p>
+          <button onClick={AddHandler.bind(null, item.product_id)}>Add</button>
+          <button onClick={RemoveHandler.bind(null, item.product_id)}>
+            Remove
+          </button>
+        </Card>
+      ))}
+    </ul>
+  );
 
   return (
     <Fragment>
       <BaseLayout>
         <Card>
-          <div>Cart Items</div>
-          <ul>
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3</li>
-          </ul>
+          <h1>Cart Items</h1>
+          {cartItemsJSX}
         </Card>
         <div>
           Checkout Form
