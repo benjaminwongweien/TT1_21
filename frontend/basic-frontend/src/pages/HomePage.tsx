@@ -1,6 +1,6 @@
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { Avatar, Button, Card, Col, Row } from "antd";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { BaseLayout } from "../layout";
 import { notificationService, productService } from "../services";
@@ -13,11 +13,10 @@ export const HomePage = () => {
   }, []);
 
   const history = useHistory();
-
+  const [products, setProducts] = useState([]);
   const onInit = async () => {
     try {
       const res = await productService.viewAllProducts();
-      console.log(res);
     } catch (err: any) {
       notificationService.error(err.error, err.message);
     }
