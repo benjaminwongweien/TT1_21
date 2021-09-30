@@ -1,7 +1,6 @@
 import { RouteConfig } from "..";
 import { Url } from "../../constants";
-import { HomePage } from "../../pages";
-import { ChartsPage } from "../../pages/ChartsPage";
+import { ChartsPage, CheckoutPage, HomePage } from "../../pages";
 
 export const privateRouteConfig: RouteConfig[] = [
   {
@@ -13,5 +12,10 @@ export const privateRouteConfig: RouteConfig[] = [
     path: Url.CHARTS,
     exact: true,
     children: <ChartsPage />,
+  },
+  {
+    path: Url.CHECKOUT,
+    exact: true,
+    children: <CheckoutPage />,
   },
 ];

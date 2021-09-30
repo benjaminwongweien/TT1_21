@@ -2,24 +2,13 @@ import { RouteConfig } from "..";
 import { Url } from "../../constants";
 import {
   AccessDeniedPage,
+  ChartsPage,
+  CheckoutPage,
   HomePage,
   LoginPage,
   NotFoundPage,
 } from "../../pages";
-import { CheckoutPage } from "../../pages/CheckoutPage";
-import { ChartsPage } from "../../pages/ChartsPage";
-
 export const publicRouteConfig: RouteConfig[] = [
-  {
-    path: Url.HOME,
-    exact: true,
-    children: <HomePage />,
-  },
-  {
-    path: Url.CHARTS,
-    exact: true,
-    children: <ChartsPage />,
-  },
   {
     path: Url.LOGIN,
     exact: true,
@@ -39,5 +28,20 @@ export const publicRouteConfig: RouteConfig[] = [
     path: Url.NOT_FOUND,
     exact: true,
     children: <NotFoundPage />,
+  },
+  {
+    path: Url.HOME,
+    exact: true,
+    children: <HomePage />,
+  },
+  {
+    path: Url.CHARTS,
+    exact: true,
+    children: <ChartsPage />,
+  },
+  {
+    path: Url.CHECKOUT,
+    exact: true,
+    children: <CheckoutPage />,
   },
 ];

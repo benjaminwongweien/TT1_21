@@ -3,7 +3,7 @@ import {
   BarChartOutlined,
   LogoutOutlined,
   ShoppingCartOutlined,
-  ShoppingOutlined
+  ShoppingOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import { Header } from "antd/lib/layout/layout";
@@ -38,7 +38,7 @@ export const BaseLayout = ({ children }: BaseLayoutProps) => {
         onClick: () => history.push("/charts"),
       },
       {
-        icon: <ShoppingCartOutlined/>,
+        icon: <ShoppingCartOutlined />,
         name: "Cart",
         onClick: () => history.push("/checkout"),
       },
