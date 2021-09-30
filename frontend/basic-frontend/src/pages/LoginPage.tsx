@@ -11,18 +11,17 @@ export const LoginPage = () => {
   const history = useHistory();
 
   const onFinish = async (values: any) => {
-    // history.push("/home");
     try {
       const res = await authService.login({
-        username: values.username,
+        email: values.email,
         password: values.password,
       });
       console.log(res);
-      setUser({ token: res.token });
-      sessionStorage.setItem("token", JSON.stringify(res.token));
+      // setUser({ token: res.token });
+      // sessionStorage.setItem("token", JSON.stringify(res.token));
       history.push("/home");
     } catch (err: any) {
-      notificationService.error(err.error, err.message);
+      // notificationService.error(err.error, err.message);
     }
   };
 
@@ -31,12 +30,12 @@ export const LoginPage = () => {
       <div className="login-form">
         <Form initialValues={{ remember: true }} onFinish={onFinish}>
           <Form.Item
-            name="username"
-            rules={[{ required: true, message: "Please input your Username!" }]}
+            name="email"
+            rules={[{ required: true, message: "Please input your Email!" }]}
           >
             <Input
               prefix={<UserOutlined className="site-form-item-icon" />}
-              placeholder="Username"
+              placeholder="Email"
             />
           </Form.Item>
           <Form.Item
