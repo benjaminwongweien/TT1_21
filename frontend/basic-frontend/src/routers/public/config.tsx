@@ -1,8 +1,24 @@
 import { RouteConfig } from "..";
 import { Url } from "../../constants";
-import { AccessDeniedPage, LoginPage, NotFoundPage } from "../../pages";
+import {
+  AccessDeniedPage,
+  HomePage,
+  LoginPage,
+  NotFoundPage,
+} from "../../pages";
+import { ChartsPage } from "../../pages/ChartsPage";
 
 export const publicRouteConfig: RouteConfig[] = [
+  {
+    path: Url.HOME,
+    exact: true,
+    children: <HomePage />,
+  },
+  {
+    path: Url.CHARTS,
+    exact: true,
+    children: <ChartsPage />,
+  },
   {
     path: Url.LOGIN,
     exact: true,
