@@ -16,15 +16,15 @@ export const CheckoutPage = () => {
   const history = useHistory();
 
   const onFinish = async (values: any) => {
-    console.log(values);
-    console.log(cartItems);
+    //console.log(values);
+    //console.log(cartItems);
     let url = "http://localhost:8000/addorder/";
     let response = await apiService.post(url, cartItems);
-    console.log(response);
+    //console.log(response);
   };
 
   const AddHandler = (itemId: any) => {
-    console.log("Add :", itemId);
+    //console.log("Add :", itemId);
 
     for (let i = 0; i < cartItems.length; i++) {
       if (cartItems[i].product_id === itemId) {
@@ -33,11 +33,11 @@ export const CheckoutPage = () => {
       }
     }
 
-    console.log(cartItems);
+    //console.log(cartItems);
   };
 
   const RemoveHandler = (itemId: any) => {
-    console.log("Remove :", itemId);
+    //console.log("Remove :", itemId);
 
     for (let i = 0; i < cartItems.length; i++) {
       if (cartItems[i].product_id === itemId) {
