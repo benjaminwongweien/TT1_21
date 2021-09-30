@@ -5,4 +5,5 @@ export enum Url {
   LOGIN = "/",
   HOME = "/home",
   CHARTS = "/charts",
+  CHECKOUT = "/checkout",
 }

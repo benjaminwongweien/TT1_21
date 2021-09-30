@@ -7,7 +7,7 @@ import {
   NotFoundPage,
 } from "../../pages";
 import { ChartsPage } from "../../pages/ChartsPage";
-
+import { CheckoutPage } from "../../pages/CheckoutPage";
 export const publicRouteConfig: RouteConfig[] = [
   {
     path: Url.HOME,
@@ -23,6 +23,11 @@ export const publicRouteConfig: RouteConfig[] = [
     path: Url.LOGIN,
     exact: true,
     children: <LoginPage />,
+  },
+  {
+    path: Url.CHECKOUT,
+    exact: true,
+    children: <CheckoutPage />,
   },
   {
     path: Url.ACCESS_DENIED,
