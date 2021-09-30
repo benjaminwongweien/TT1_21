@@ -1,0 +1,9 @@
+{
+
+    "_python": "Python Related Settings",
+    "python.languageServer": "Pylance",
+    "python.terminal.activateEnvironment": true,
+    "python.defaultInterpreterPath": ".\\venv\\Scripts\\python.exe",
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    
+}
