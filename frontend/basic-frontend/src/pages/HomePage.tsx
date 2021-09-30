@@ -1,5 +1,5 @@
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
-import { Avatar, Button, Card, Col, Row } from "antd";
+import { Card, Col, Row } from "antd";
 import { Fragment, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { BaseLayout } from "../layout";
@@ -18,7 +18,6 @@ export const HomePage = () => {
     try {
       const res = await productService.viewAllProducts();
       var products = JSON.parse(JSON.stringify(res));
-      console.log(products);
       setProducts(products);
     } catch (err: any) {
       notificationService.error(err.error, err.message);
