@@ -28,6 +28,12 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,10 +45,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ttuser',
-    'ecommerce'
+    'ecommerce',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -82,6 +94,16 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+AUTHENTICATION_BACKENDS = [
+    
+    # Needed to login by username in Django admin, regardless of allauth
+    'django.contrib.auth.backends.ModelBackend',
+
+    # allauth specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+    
+]
 
 
 # Password validation
@@ -130,3 +152,135 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "ttuser.TTUser"
 
 SITE_ID = 1
+
+# ╔═══════════════════╗
+# ║ All Auth Settings ║
+# ╚═══════════════════╝
+# https://django-allauth.readthedocs.io/en/latest/configuration.html
+
+REST_FRAMEWORK = {
+    'DEFAULT_THROTTLE_RATES': {
+        'dj_rest_auth': '100/minute',
+        'new_email': '3/minute',
+    },
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated', 
+    )
+}
+
+# Users must signup with an email
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+
+# The user is required to hand over an e-mail address when signing up.
+ACCOUNT_EMAIL_REQUIRED = True
+
+# When set to “mandatory” the user is blocked from logging in until the email address is verified.
+ACCOUNT_EMAIL_VERIFICATION = "none"
+
+# Users will not be able to change their email address as they are unable to add the new address, followed by removing the old address.
+ACCOUNT_MAX_EMAIL_ADDRESSES = 1
+
+# User is automatically logged out after changing or setting their password.
+ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
+
+# This setting determines whether the username is stored in lowercase
+ACCOUNT_PRESERVE_USERNAME_CASING = False
+
+# This setting determines the expiration of email confirmation
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
+
+# ╔═══════════════════════════╗
+# ║ DJ - Rest - Auth Settings ║
+# ╚═══════════════════════════╝
+# https://dj-rest-auth.readthedocs.io/en/latest/configuration.html
+
+# Enable session login in Login API view
+REST_SESSION_LOGIN = False
+
+# Enable JWT Authentication instead of Token/Session based.
+REST_USE_JWT = True
+
+# The cookie name/key. If disabled, no cookie will be set. (Ideal Behaviour)
+# JWT_AUTH_COOKIE = 'token'
+
+# The name/key of the refresh token. 
+JWT_AUTH_REFRESH_COOKIE = 'refresh'
+
+# To tell the browser not to send this cookie when performing a cross-origin request 
+JWT_AUTH_SAMESITE = "strict"
+
+# If you want to prevent client-side JavaScript from having access to the cookie
+JWT_AUTH_HTTPONLY = True
+
+# If you want the cookie to be only sent to the server when a request is made with the https scheme
+# Shoul be True in production
+JWT_AUTH_SECURE = False
+
+# Enables CSRF checks for only authenticated views when using the JWT cookie for auth. 
+# Does not effect a client’s ability to authenticate using a JWT Bearer Auth header without a CSRF token.
+JWT_AUTH_COOKIE_USE_CSRF  = False
+
+# Enables CSRF checks for authenticated and unauthenticated views when using the JWT cookie for auth. 
+# It does not effect a client’s ability to authenticate using a 
+# JWT Bearer Auth header without a CSRF token 
+# (though getting the JWT token in the first place without passing a CSRF token isnt possible).
+JWT_AUTH_COOKIE_ENFORCE_CSRF_ON_UNAUTHENTICATED = False
+
+# Return Expiration in Settings
+JWT_AUTH_RETURN_EXPIRATION = False
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    
+    # Specifies how long access tokens are valid
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1000),
+    
+    # Specifies how long refresh tokens are valid
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    
+    # When set to True, if a refresh token is submitted to the TokenRefreshView, 
+    # a new refresh token will be returned along with the new access token. 
+    # This new refresh token will be supplied via a “refresh” key in the JSON response. 
+    # New refresh tokens will have a renewed expiration time which is determined by adding the 
+    # timedelta in the REFRESH_TOKEN_LIFETIME setting to the current time when the request is made. 
+    # If the blacklist app is in use and the BLACKLIST_AFTER_ROTATION setting is set to True, refresh 
+    # tokens submitted to the refresh view will be added to the blacklist.
+    'ROTATE_REFRESH_TOKENS': False,
+    
+    # When set to True, causes refresh tokens submitted to the TokenRefreshView to be added to the
+    # blacklist if the blacklist app is in use and the ROTATE_REFRESH_TOKENS setting is set to True.
+    # You need to add 'rest_framework_simplejwt.token_blacklist', to your INSTALLED_APPS in the settings
+    # file to use this setting.
+    'BLACKLIST_AFTER_ROTATION': True,
+
+    # When set to True, last_login field in the auth_user table is updated upon login (TokenObtainPairView).
+    # Warning: Updating last_login will dramatically increase the number of database transactions. 
+    # People abusing the views could slow the server and this could be a security vulnerability. 
+    # If you really want this, throttle the endpoint with DRF at the very least.
+    'UPDATE_LAST_LOGIN': False,
+
+    # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html#algorithm
+    'ALGORITHM': 'HS256',
+    
+    # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html#signing-key
+    'SIGNING_KEY': SECRET_KEY,
+    
+    # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html#verifying-key
+    'VERIFYING_KEY': None,
+    
+    # The audience claim to be included in generated tokens and/or validated in decoded tokens. 
+    # When set to None, this field is excluded from tokens and is not validated.
+    'AUDIENCE': None,
+    
+    # The issuer claim to be included in generated tokens and/or validated in decoded tokens. 
+    # When set to None, this field is excluded from tokens and is not validated.
+    'ISSUER': None,
+    
+    # Leeway is used to give some margin to the expiration time. 
+    # This can be an integer for seconds or a datetime.timedelta.
+    'LEEWAY': 0,
+}

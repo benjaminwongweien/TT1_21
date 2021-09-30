@@ -3,3 +3,4 @@ django-cors-headers
 django-allauth
 dj-rest-auth
 django-rest-framework
+djangorestframework-simplejwt
