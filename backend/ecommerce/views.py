@@ -13,7 +13,7 @@ class ViewAllProducts(ListAPIView):
 
     serializer_class = ProductSerializer
     queryset = EcommerceProduct.objects.all()
-    permission_classes = [IsAuthenticated]
+    permission_classes = []
 
 
 class GetOrders(ListAPIView):
