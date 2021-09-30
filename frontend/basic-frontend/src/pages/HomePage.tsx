@@ -1,5 +1,5 @@
-import { Button } from "antd";
-import { useEffect } from "react";
+import { Button, Card } from "antd";
+import { Fragment, useEffect } from "react";
 import { useHistory } from "react-router";
 import { BaseLayout } from "../layout";
 import { notificationService, testService } from "../services";
@@ -21,14 +21,13 @@ export const HomePage = () => {
   };
 
   return (
-    <BaseLayout>
-      <div>
-        Welcome to DBS, XXX!
-        <p />
-        <Button type="primary" onClick={() => history.push("/charts")}>
-          Start Exploring
-        </Button>
-      </div>
-    </BaseLayout>
+    <Fragment>
+      <BaseLayout>
+        <Card>
+          <h1>Shop</h1>
+        </Card>
+        <Card>Items</Card>
+      </BaseLayout>
+    </Fragment>
   );
 };
